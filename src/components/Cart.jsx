@@ -1,4 +1,22 @@
-export default function Cart({ items, onUpdateItemQuantity }) {
+import { useContext } from "react";
+
+import { CartContext } from "../store/shopping-cart-context";
+
+// now we are deprecating the use of items property, this was the previous function.
+// export default function Cart({ items, onUpdateItemQuantity }) {
+
+
+// and this is the updated function
+export default function Cart({ onUpdateItemQuantity }) {
+
+  // you can also destructure the component to obtain certains props, for example:
+  // const { items } = useContext(CartContext);
+  // const cartCtx = useContext(CartContext);
+
+  const { items } = useContext(CartContext);
+
+  // instead of using items, we will use cartCtx that contains the items!
+
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -7,8 +25,10 @@ export default function Cart({ items, onUpdateItemQuantity }) {
 
   return (
     <div id="cart">
+      {/* we can use both ways */}
+      {/* {cartCtx.items.length === 0 && <p>No items in cart!</p>} */}
       {items.length === 0 && <p>No items in cart!</p>}
-      {items.length > 0 && (
+      {items.length > 0 &&  (
         <ul id="cart-items">
           {items.map((item) => {
             const formattedPrice = `$${item.price.toFixed(2)}`;

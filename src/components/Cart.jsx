@@ -7,13 +7,15 @@ import { CartContext } from "../store/shopping-cart-context";
 
 
 // and this is the updated function
-export default function Cart({ onUpdateItemQuantity }) {
+export default function Cart() {
+
+  const { items, updateItemQuantity} = useContext(CartContext);
 
   // you can also destructure the component to obtain certains props, for example:
-  // const { items } = useContext(CartContext);
+  // const { items } = useContextß(CartContext);
   // const cartCtx = useContext(CartContext);
 
-  const { items } = useContext(CartContext);
+  // const { items } = useContext(CartContext);
 
   // instead of using items, we will use cartCtx that contains the items!
 
@@ -40,11 +42,11 @@ export default function Cart({ onUpdateItemQuantity }) {
                   <span> ({formattedPrice})</span>
                 </div>
                 <div className="cart-item-actions">
-                  <button onClick={() => onUpdateItemQuantity(item.id, -1)}>
+                  <button onClick={() => updateItemQuantity(item.id, -1)}>
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => onUpdateItemQuantity(item.id, 1)}>
+                  <button onClick={() => updateItemQuantity(item.id, 1)}>
                     +
                   </button>
                 </div>
